@@ -163,40 +163,5 @@ class ClientesController extends Controller
             'exito' => TRUE,
         ]);
     }
-    public function clientes_add(Request $request)
-    {
-        $request->validate([
-            'ci_cli' => 'required|digits:10|unique:clientes,ci_cli',
-            'apellido_cli' => 'required|not_regex:/[0-9]/|not_regex:/[!"#$%&()+]/',
-            'nombre_cli' => 'required|not_regex:/[0-9]/|not_regex:/[!"#$%&()+]/',
-            'celular_cli' => 'nullable|digits:9|unique:clientes,celular_cli',
-        ], [
-            'ci_cli.required' => 'Campo obligatorio',
-            'ci_cli.digits' => 'Solo debe ingresar números',
-            'ci_cli.unique' => 'Este numero de cédula ya esta registrado',
-            'nombre_cli.required' => 'Este campo es obligatorio',
-            'nombre_cli.exists' => 'Este nombre de usuario no existe',
-            'nombre_cli.not_regex' => 'No debes ingresar caracteres especiales ni números',
-            'apellido_cli.required' => 'Este campo es obligatorio',
-            'apellido_cli.exists' => 'Este nombre de usuario no existe',
-            'apellido_cli.not_regex' => 'No debes ingresar caracteres especiales ni números',
-            'celular_cli.digits' => 'Solo debe ingresar números',
-            'celular_cli.unique' => 'Este numero ya esta registrado',
-        ]);
-        $newCliente = new Cliente;
-
-        $newCliente->ci_cli = $request->ci_cli;
-        $newCliente->apellido_cli = Str::title($request->apellido_cli);
-        $newCliente->nombre_cli = Str::title($request->nombre_cli);
-        $newCliente->celular_cli = $request->celular_cli;
-        // POR DEFAULT 
-        // $newCliente->tipo_cli = Str::title('Diario');
-        $newCliente->sexo_cli = Str::title($request->sexo_cli);
-
-        $newCliente->save();
-        return back()->with([
-            'exito' => TRUE,
-            'new_cliente' => $newCliente->ci_cli
-        ]);
-    }
+    
 }
