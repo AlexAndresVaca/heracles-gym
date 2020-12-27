@@ -1,0 +1,193 @@
+.sin-cursor {
+    overflow: hidden;
+}
+
+
+/* Configuracion aparciencia barra lateral */
+
+.bg-gradient-primary {
+    background-color: #000000;
+    background-image: linear-gradient(180deg, #df4e4e 10%, #be2222 100%);
+    background-size: cover;
+}
+
+
+/* Cambiar color barra top */
+
+.bg-black {
+    background-color: #1d1d1d!important;
+}
+
+.bg-white {
+    background-color: #ffffff!important;
+}
+
+.bg-black-b {
+    background-color: #000000!important;
+}
+
+
+/* Configuracion boton de menu en moviles */
+
+.btn-link {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.185);
+}
+
+.btn-link:hover {
+    color: red;
+    text-decoration: underline;
+    background-color: #7e7e7e21!important;
+}
+
+.topbar #sidebarToggleTop:active {
+    background-color: rgba(100, 100, 100, 0.185) !important;
+}
+
+.btn.focus,
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(59, 59, 59, 0.25);
+}
+
+
+/* LOGING */
+
+.bg-login-image {
+    background: url("../img/logo.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-gradient-black {
+    background-color: #000000;
+    background-image: linear-gradient(180deg, #000000 10%, #202020 100%);
+    background-size: cover;
+}
+
+.bg-darkred {
+    background-color: darkred;
+}
+
+.bg-gradient-black-2 {
+    background-color: #000000;
+    background-image: linear-gradient(180deg, #272727 10%, #474747 100%);
+    background-size: cover;
+}
+
+.user {
+    border: 1px solid transparent;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* Tablas */
+
+.table {
+    border-collapse: collapse !important;
+}
+
+.table-gym td,
+.table-gym th {
+    /* background-color: transparent; */
+    border: 1px solid gray;
+}
+
+.table-gym {
+    color: black;
+    border: 1px solid gray;
+}
+
+.table-gym th,
+.table-gym td,
+.table-gym thead th,
+.table-gym tbody+tbody {
+    border-color: #0000001f !important;
+}
+
+.table-gym thead th {
+    background-color: rgb(185, 0, 0)!important;
+    color: white;
+}
+
+.table-gym tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+.table-gym tbody tr {
+    background-color: rgb(226, 226, 226);
+}
+
+.table-gym tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.205)!important;
+    color: white;
+    transition: .2s ease-in-out;
+}
+
+.color-white {
+    color: white;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    border: transparent;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+
+.page-link:hover {
+    color: gray;
+}
+
+.border-left-purple {
+    border-left-width: .25rem;
+    border-left-color: purple;
+}
+
+.text-purple {
+    color: purple;
+}
+
+.w-150px {
+    width: 150px;
+}
+
+.w-75px {
+    width: 75px;
+}
+
+.w-25px {
+    width: 25px;
+}
+
+.navbar-dark {
+    transition: all 1s ease-in-out;
+}
+
+.bg-diario {
+    /* background-color: rgba(0, 255, 149, 0.3)!important; */
+}
+
+.bg-mensual {
+    /* background-color: rgba(0, 4, 255, 0.3)!important; */
+}
+
+.bg-expirado {
+    /* background-color: rgba(255, 0, 0, 0.664)!important; */
+    /* color: white; */
+}

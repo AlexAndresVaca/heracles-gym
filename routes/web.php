@@ -17,6 +17,13 @@ use App\Http\Controllers\ClientesController;
 */
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
+// Login
+
+Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/login', [PagesController::class, 'login'])->name('login');
+Route::POST('/login/', [PagesController::class, 'iniciarSesion'])->name('iniciarSesion');
+Route::POST('/close', [PagesController::class, 'cerrarSesion'])->name('cerrarSesion');
+Route::get('inicio', [PagesController::class, 'inicio'])->name('inicio');
 // RUTAS CRUD CLIENTES
 Route::get('inicio/clientes',[ClientesController::class, 'clientes_index'])->name('clientes.index');
 Route::POST('inicio/clientes/',[ClientesController::class,'clientes_add'])->name('clientes.add');
