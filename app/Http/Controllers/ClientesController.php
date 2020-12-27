@@ -163,5 +163,23 @@ class ClientesController extends Controller
             'exito' => TRUE,
         ]);
     }
-    
+    public function clientes_delete(Request $request, $id)
+    {
+        $listaPagos = Pago::where('fk_ci_cli_pag', $id)->get();
+        $listaMedidas = Medidas::where('fk_ci_cli_med', $id)->get();
+        $listaIngresos = Ingreso::where('fk_ci_cli_ing', $id)->get();
+        $cliente = Cliente::findOrFail($id);
+        foreach($listaPagos as $item){
+            $item->delete();
+        }
+        foreach($listaMedidas as $item){
+            $item->delete();
+        }
+        foreach($listaIngresos as $item){
+            $item->delete();
+        }
+        $cliente->delete();
+        $clienteDelete = TRUE;
+        return redirect(route('clientes.index'))->with(['clienteDelete'=>$clienteDelete]);
+    }
 }
