@@ -30,3 +30,8 @@ Route::POST('inicio/clientes/',[ClientesController::class,'clientes_add'])->name
 Route::get('inicio/clientes/perfil/{id}',[ClientesController::class, 'clientes_perfil'])->name('clientes.perfil');
 Route::PUT('inicio/clientes/perfil/{id}/',[ClientesController::class, 'clientes_update'])->name('clientes.update');
 Route::POST('inicio/clientes/perfil/{id}/delete',[ClientesController::class, 'clientes_delete'])->name('clientes.delete');
+// ACCESO CLIENTES
+    # Ingresos
+    Route::get('heracles/ingreso',[IngresoController::class,'ingreso'])->name('heracles.ingreso');
+    Route::POST('heracles/ingreso/',[IngresoController::class,'ingreso_post'])->name('heracles.ingreso.post');
+    Route::PUT('heracles/ingreso/cambiar-tipo/',[IngresoController::class,'cambiar_tipo'])->name('heracles.cambiar.tipo');
