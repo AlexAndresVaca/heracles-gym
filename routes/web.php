@@ -35,3 +35,8 @@ Route::POST('inicio/clientes/perfil/{id}/delete',[ClientesController::class, 'cl
     Route::get('heracles/ingreso',[IngresoController::class,'ingreso'])->name('heracles.ingreso');
     Route::POST('heracles/ingreso/',[IngresoController::class,'ingreso_post'])->name('heracles.ingreso.post');
     Route::PUT('heracles/ingreso/cambiar-tipo/',[IngresoController::class,'cambiar_tipo'])->name('heracles.cambiar.tipo');
+// MEDIDAS
+Route::get('inicio/clientes/perfil/nueva-medidas/{id}',[MedidasController::class, 'clientes_medidas_nueva'])->name('clientes.medidas.registrar');
+Route::POST('inicio/clientes/perfil/nueva-medidas/{id}/',[MedidasController::class, 'clientes_medidas_new'])->name('clientes.medidas.new');
+Route::get('inicio/clientes/perfil/medidas/{id}',[MedidasController::class, 'clientes_medidas_ver'])->name('clientes.medidas');
+Route::POST('inicio/clientes/perfil/medidas/{id}/delete',[MedidasController::class, 'clientes_medidas_delete'])->name('clientes.medidas.delete');
