@@ -44,3 +44,5 @@ Route::POST('inicio/clientes/perfil/medidas/{id}/delete',[MedidasController::cla
     # Consulta
     Route::get('heracles/consulta',[IngresoController::class,'consulta'])->name('heracles.consulta');
     Route::POST('heracles/consulta/',[IngresoController::class,'consulta_post'])->name('heracles.consulta.post');
+// REPORTES
+Route::POST('inicio/reportes/diario/{id}/delete',[ReportesController::class ,'reportes_diario_delete'])->name('reportes.diario.delete');

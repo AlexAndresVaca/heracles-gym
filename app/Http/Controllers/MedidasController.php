@@ -44,6 +44,68 @@ class MedidasController extends Controller
             }
         }
     }
+    public function clientes_medidas_ver(Request $request, $id)
+    {
+        $usuario = $request->session()->get('usuario_activo');
+        if ($usuario == NULL) {
+            return redirect(route('login'));
+        } else {
+            // Capturamos la información de la medida seleccionada
+            $medida = Medidas::findOrFail($id);
+            // Capturamos la información del cliente
+            $perfilCliente = Cliente::findOrFail($medida->fk_ci_cli_med);
+            // Convertimos la informacion null en guion
+            $valor = "-";
+            if (is_null($medida->peso_med)) {
+                $medida->peso_med = $valor;
+            }
+            if (is_null($medida->talla_med)) {
+                $medida->talla_med = $valor;
+            }
+            if (is_null($medida->biceps_med)) {
+                $medida->biceps_med = $valor;
+            }
+            if (is_null($medida->triceps_med)) {
+                $medida->triceps_med = $valor;
+            }
+            if (is_null($medida->cintura_med)) {
+                $medida->cintura_med = $valor;
+            }
+            if (is_null($medida->pantorrillas_med)) {
+                $medida->pantorrillas_med = $valor;
+            }
+            if (is_null($medida->muslo1_med)) {
+                $medida->muslo1_med = $valor;
+            }
+            if (is_null($medida->muslo2_med)) {
+                $medida->muslo2_med = $valor;
+            }
+            if (is_null($medida->espaldaH_med)) {
+                $medida->espaldaH_med = $valor;
+            }
+            if (is_null($medida->pectoralH_med)) {
+                $medida->pectoralH_med = $valor;
+            }
+            if (is_null($medida->toraxM_med)) {
+                $medida->toraxM_med = $valor;
+            }
+            if (is_null($medida->caderaM_med)) {
+                $medida->caderaM_med = $valor;
+            }
+            if (is_null($medida->muslo3M_med)) {
+                $medida->muslo3M_med = $valor;
+            }
+            if (is_null($medida->gluteosM_med)) {
+                $medida->gluteosM_med = $valor;
+            }
+            // regresamos la información a la vista dependiendo el genero
+            if ($perfilCliente->sexo_cli == 'Hombre') {
+                return view('app.clientes.medidas.medidasH', compact('usuario', 'perfilCliente', 'medida'));
+            } else if ($perfilCliente->sexo_cli == 'Mujer') {
+                return view('app.clientes.medidas.medidasM', compact('usuario', 'perfilCliente', 'medida'));
+            }
+        }
+    }
     public function clientes_medidas_new(Request $request, $id)
     {
         // Validaciones 
@@ -144,68 +206,7 @@ class MedidasController extends Controller
             'exito_medida' => $exito_medida,
         ]);
     }
-    public function clientes_medidas_ver(Request $request, $id)
-    {
-        $usuario = $request->session()->get('usuario_activo');
-        if ($usuario == NULL) {
-            return redirect(route('login'));
-        } else {
-            // Capturamos la información de la medida seleccionada
-            $medida = Medidas::findOrFail($id);
-            // Capturamos la información del cliente
-            $perfilCliente = Cliente::findOrFail($medida->fk_ci_cli_med);
-            // Convertimos la informacion null en guion
-            $valor = "-";
-            if (is_null($medida->peso_med)) {
-                $medida->peso_med = $valor;
-            }
-            if (is_null($medida->talla_med)) {
-                $medida->talla_med = $valor;
-            }
-            if (is_null($medida->biceps_med)) {
-                $medida->biceps_med = $valor;
-            }
-            if (is_null($medida->triceps_med)) {
-                $medida->triceps_med = $valor;
-            }
-            if (is_null($medida->cintura_med)) {
-                $medida->cintura_med = $valor;
-            }
-            if (is_null($medida->pantorrillas_med)) {
-                $medida->pantorrillas_med = $valor;
-            }
-            if (is_null($medida->muslo1_med)) {
-                $medida->muslo1_med = $valor;
-            }
-            if (is_null($medida->muslo2_med)) {
-                $medida->muslo2_med = $valor;
-            }
-            if (is_null($medida->espaldaH_med)) {
-                $medida->espaldaH_med = $valor;
-            }
-            if (is_null($medida->pectoralH_med)) {
-                $medida->pectoralH_med = $valor;
-            }
-            if (is_null($medida->toraxM_med)) {
-                $medida->toraxM_med = $valor;
-            }
-            if (is_null($medida->caderaM_med)) {
-                $medida->caderaM_med = $valor;
-            }
-            if (is_null($medida->muslo3M_med)) {
-                $medida->muslo3M_med = $valor;
-            }
-            if (is_null($medida->gluteosM_med)) {
-                $medida->gluteosM_med = $valor;
-            }
-            // regresamos la información a la vista dependiendo el genero
-            if ($perfilCliente->sexo_cli == 'Hombre') {
-                return view('app.clientes.medidas.medidasH', compact('usuario', 'perfilCliente', 'medida'));
-            } else if ($perfilCliente->sexo_cli == 'Mujer') {
-                return view('app.clientes.medidas.medidasM', compact('usuario', 'perfilCliente', 'medida'));
-            }
-        }
-    }
+
     public function clientes_medidas_delete(Request $request, $id)
     {
         // Recuperar medida a eliminar
