@@ -40,3 +40,7 @@ Route::get('inicio/clientes/perfil/nueva-medidas/{id}',[MedidasController::class
 Route::POST('inicio/clientes/perfil/nueva-medidas/{id}/',[MedidasController::class, 'clientes_medidas_new'])->name('clientes.medidas.new');
 Route::get('inicio/clientes/perfil/medidas/{id}',[MedidasController::class, 'clientes_medidas_ver'])->name('clientes.medidas');
 Route::POST('inicio/clientes/perfil/medidas/{id}/delete',[MedidasController::class, 'clientes_medidas_delete'])->name('clientes.medidas.delete');
+// ACCESO CLIENTES
+    # Consulta
+    Route::get('heracles/consulta',[IngresoController::class,'consulta'])->name('heracles.consulta');
+    Route::POST('heracles/consulta/',[IngresoController::class,'consulta_post'])->name('heracles.consulta.post');
