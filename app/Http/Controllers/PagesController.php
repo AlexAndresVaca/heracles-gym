@@ -113,4 +113,116 @@ class PagesController extends Controller
             return view('app.inicio', compact('usuario','numMensuales','numDiarios','numExpirados','numEspeciales','numMensualesMes','numDiariosMes','numExpiradosMes','numEspecialesMes','productos'));
         }
     }
+
+    public function tienda(Request $request)
+    {
+        $usuario = $request->session()->get('usuario_activo');
+        if ($usuario == NULL) {
+            return redirect(route('login'));
+        } else {
+            return view('app.tienda', compact('usuario'));
+        }
+    }
+    public function autocompletar_productos(Request $request)
+    {
+        $term = $request->get('term');
+        $querys = Producto::where('detalle_prod', 'LIKE', '%' . $term . '%')->get();
+        // 
+        $response = array();
+        foreach ($querys as $productos) {
+            $response[] = array("label" => $productos->detalle_prod, "value" => $productos->cod_prod);
+        }
+        return response()->json($response);
+    }
+    public function vender_productos(Request $request)
+    {
+        $request->validate([
+            'detalle_prod_venta' => 'required|exists:productos,detalle_prod',
+            'cantidad_prod_venta' => 'required|integer|between:0,999',
+        ], [
+            'detalle_prod_venta.required' => 'Campo obligatorio',
+            'detalle_prod_venta.exists' => 'Producto no encontrado',
+            'cantidad_prod_venta.required' => 'Campo obligatorio',
+            'cantidad_prod_venta.integer' => 'Solo se acepta números enteros',
+            'cantidad_prod_venta.between' => 'Puedes registrar cantidades entre 0 y 999',
+        ]);
+        // Crear la nueva venta
+        $newVenta = new Venta;
+        $newVenta->descripcion_ven = "Venta";
+        $newVenta->cantidad_ven = $request->cantidad_prod_venta;
+        $newVenta->fk_cod_prod_ven = $request->cod_prod_venta;
+        // Actualizar stock
+        #Encontrar producto
+        $actualizarStock = Producto::findOrFail($request->cod_prod_venta);
+        #Disminuir stock
+        $actualizarStock->stock_prod = $actualizarStock->stock_prod - $request->cantidad_prod_venta;
+        if ($actualizarStock->stock_prod > 0) {
+            $actualizarStock->save();
+            $newVenta->save();
+            return back()->with([
+                'venta_exito' => TRUE,
+            ]);
+        }
+        else{
+            return back()->with([
+                'error_stock' => TRUE,
+            ]);
+        }
+    }
+    public function devolver_productos(Request $request)
+    {
+        $request->validate([
+            'detalle_prod_devolucion' => 'required|exists:productos,detalle_prod',
+            'cantidad_prod_devolucion' => 'required|integer|between:0,999',
+        ], [
+            'detalle_prod_devolucion.required' => 'Campo obligatorio',
+            'detalle_prod_devolucion.exists' => 'Producto no encontrado',
+            'cantidad_prod_devolucion.required' => 'Campo obligatorio',
+            'cantidad_prod_devolucion.integer' => 'Solo se acepta números enteros',
+            'cantidad_prod_devolucion.between' => 'Puedes registrar cantidades entre 0 y 999',
+        ]);
+        // Crear la nueva venta
+        $newDevolucion = new Venta;
+        $newDevolucion->descripcion_ven = "Devolucion";
+        $newDevolucion->cantidad_ven = $request->cantidad_prod_devolucion;
+        $newDevolucion->fk_cod_prod_ven = $request->cod_prod_devolucion;
+        // Actualizar stock
+        #Encontrar producto
+        $actualizarStock = Producto::findOrFail($request->cod_prod_devolucion);
+        #Disminuir stock
+        $actualizarStock->stock_prod = $actualizarStock->stock_prod + $request->cantidad_prod_devolucion;
+        $actualizarStock->save();
+        $newDevolucion->save();
+        return back()->with([
+            'devolucion_exito' => TRUE,
+        ]);
+    }
+    public function abastecer_productos(Request $request)
+    {
+        $request->validate([
+            'detalle_prod_abastecer' => 'required|exists:productos,detalle_prod',
+            'cantidad_prod_abastecer' => 'required|integer|between:0,999',
+        ], [
+            'detalle_prod_abastecer.required' => 'Campo obligatorio',
+            'detalle_prod_abastecer.exists' => 'Producto no encontrado',
+            'cantidad_prod_abastecer.required' => 'Campo obligatorio',
+            'cantidad_prod_abastecer.integer' => 'Solo se acepta números enteros',
+            'cantidad_prod_abastecer.between' => 'Puedes registrar cantidades entre 0 y 999',
+        ]);
+        // Crear la nueva venta
+        $newAbastecer = new Venta;
+        $newAbastecer->descripcion_ven = "Abastecimiento";
+        $newAbastecer->cantidad_ven = $request->cantidad_prod_abastecer;
+        $newAbastecer->fk_cod_prod_ven = $request->cod_prod_abastecer;
+        // Actualizar stock
+        #Encontrar producto
+        $actualizarStock = Producto::findOrFail($request->cod_prod_abastecer);
+        #Disminuir stock
+        $actualizarStock->stock_prod = $actualizarStock->stock_prod + $request->cantidad_prod_abastecer;
+        $actualizarStock->save();
+        $newAbastecer->save();
+        return back()->with([
+            'abastecer_exito' => TRUE,
+        ]);
+    }
 }

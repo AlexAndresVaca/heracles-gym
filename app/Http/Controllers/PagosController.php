@@ -48,4 +48,13 @@ class PagosController extends Controller
                     'new_pago'=>TRUE,
         ]);
     }
+    public function pagos_delete(Request $request,$id)
+    {
+        // Obturo el codigo
+        $pagoDelete = Pago::findOrFail($id);
+        $pagoDelete->delete();
+        return back()->with([
+                    'pago_delete'=>TRUE,
+        ]);
+    }
 }
