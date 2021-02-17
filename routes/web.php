@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\GenerarPDF;
 use App\Http\Controllers\IngresoController;
 use App\Http\Controllers\MedidasController;
 use App\Http\Controllers\PagosController;
+use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ReportesController;
 
 /*
